@@ -130,29 +130,29 @@ for massID in range(len(mass_list)):
 legend.Draw()
 c_energy_HN.SaveAs("plots/energy_HN.png")
 
-c_energy_tau = TCanvas("c_energy_mu3","canvas title", 800, 800) 
-c_energy_mu3.SetLogy(1)
+c_energy_tau = TCanvas("c_energy_tau","canvas title", 800, 800) 
+c_energy_tau.SetLogy(1)
 minY=-1
 maxY=-1
 for massID in range(len(mass_list)):
-    h_energy_mu3=merged_file.Get("HN_mass_"+mass_list[massID]+"/h_energy_mu3")
-    if(h_energy_mu3.GetMaximum()>maxY or maxY==-1):
-      maxY = h_energy_mu3.GetMaximum()
-    if(h_energy_mu3.GetMinimum()<minY or minY==-1):
-      minY = h_energy_mu3.GetMinimum()
+    h_energy_tau=merged_file.Get("HN_mass_"+mass_list[massID]+"/h_energy_tau")
+    if(h_energy_tau.GetMaximum()>maxY or maxY==-1):
+      maxY = h_energy_tau.GetMaximum()
+    if(h_energy_tau.GetMinimum()<minY or minY==-1):
+      minY = h_energy_tau.GetMinimum()
       
 if(minY<=0):
   minY=0.1
 
 for massID in range(len(mass_list)):
-    h_energy_mu3=merged_file.Get("HN_mass_"+mass_list[massID]+"/h_energy_mu3")
-    h_energy_mu3.SetLineColor(1+massID)
-    h_energy_mu3.SetLineWidth(3)
+    h_energy_tau=merged_file.Get("HN_mass_"+mass_list[massID]+"/h_energy_tau")
+    h_energy_tau.SetLineColor(1+massID)
+    h_energy_tau.SetLineWidth(3)
     if (massID == 0):
-      h_energy_mu3.GetYaxis().SetRangeUser(minY,maxY)
-    h_energy_mu3.Draw("hesame")
+      h_energy_tau.GetYaxis().SetRangeUser(minY,maxY)
+    h_energy_tau.Draw("hesame")
 legend.Draw()
-c_energy_mu3.SaveAs("plots/energy_mu3.png")
+c_energy_tau.SaveAs("plots/energy_tau.png")
 
 c_energy_mu1 = TCanvas("c_energy_mu1","canvas title", 800, 800) 
 c_energy_mu1.SetLogy(1)
@@ -244,15 +244,15 @@ for massID in range(len(mass_list)):
 legend.Draw()
 c_pt_mu2.SaveAs("plots/pt_mu2.png")
 
-c_pt_mu3 = TCanvas("c_pt_mu3","canvas title", 800, 800) 
-c_pt_mu3.SetLogy(1)
+c_pt_tau = TCanvas("c_pt_tau","canvas title", 800, 800) 
+c_pt_tau.SetLogy(1)
 for massID in range(len(mass_list)):
-    h_pt_mu3=merged_file.Get("HN_mass_"+mass_list[massID]+"/h_pt_mu3")
-    h_pt_mu3.SetLineColor(1+massID)
-    h_pt_mu3.SetLineWidth(3)
-    h_pt_mu3.Draw("hesame")
+    h_pt_tau=merged_file.Get("HN_mass_"+mass_list[massID]+"/h_pt_tau")
+    h_pt_tau.SetLineColor(1+massID)
+    h_pt_tau.SetLineWidth(3)
+    h_pt_tau.Draw("hesame")
 legend.Draw()
-c_pt_mu3.SaveAs("plots/pt_mu3.png")
+c_pt_tau.SaveAs("plots/pt_tau.png")
 
 
 c_pt_neutrino = TCanvas("c_pt_neutrino","canvas title", 800, 800) 
@@ -285,14 +285,14 @@ for massID in range(len(mass_list)):
 legend.Draw()
 c_phi_mu2.SaveAs("plots/phi_mu2.png")
 
-c_phi_mu3 = TCanvas("c_phi_mu3","canvas title", 800, 800) 
+c_phi_tau = TCanvas("c_phi_tau","canvas title", 800, 800) 
 for massID in range(len(mass_list)):
-    h_phi_mu3=merged_file.Get("HN_mass_"+mass_list[massID]+"/h_phi_mu3")
-    h_phi_mu3.SetLineColor(1+massID)
-    h_phi_mu3.SetLineWidth(3)
-    h_phi_mu3.Draw("hesame")
+    h_phi_tau=merged_file.Get("HN_mass_"+mass_list[massID]+"/h_phi_tau")
+    h_phi_tau.SetLineColor(1+massID)
+    h_phi_tau.SetLineWidth(3)
+    h_phi_tau.Draw("hesame")
 legend.Draw()
-c_phi_mu3.SaveAs("plots/phi_mu3.png")
+c_phi_tau.SaveAs("plots/phi_tau.png")
 
 c_phi_neutrino = TCanvas("c_phi_neutrino","canvas title", 800, 800) 
 for massID in range(len(mass_list)):
@@ -312,32 +312,32 @@ for massID in range(len(mass_list)):
 legend.Draw()
 c_deltaphi_mu1mu2.SaveAs("plots/deltaphi_mu1mu2.png")
 
-c_deltaphi_mu1mu3 = TCanvas("c_deltaphi_mu1mu3","canvas title", 800, 800) 
+c_deltaphi_mu1tau = TCanvas("c_deltaphi_mu1tau","canvas title", 800, 800) 
 for massID in range(len(mass_list)):
-    h_phi_mu1mu3=merged_file.Get("HN_mass_"+mass_list[massID]+"/h_deltaphi_mu1mu3")
-    h_phi_mu1mu3.SetLineColor(1+massID)
-    h_phi_mu1mu3.SetLineWidth(3)
-    h_phi_mu1mu3.Draw("hesame")
+    h_phi_mu1tau=merged_file.Get("HN_mass_"+mass_list[massID]+"/h_deltaphi_mu1tau")
+    h_phi_mu1tau.SetLineColor(1+massID)
+    h_phi_mu1tau.SetLineWidth(3)
+    h_phi_mu1tau.Draw("hesame")
 legend.Draw()
-c_deltaphi_mu1mu3.SaveAs("plots/deltaphi_mu1mu3.png")
+c_deltaphi_mu1tau.SaveAs("plots/deltaphi_mu1tau.png")
 
-c_deltaphi_mu2mu3 = TCanvas("c_deltaphi_mu2mu3","canvas title", 800, 800) 
+c_deltaphi_mu2tau = TCanvas("c_deltaphi_mu2tau","canvas title", 800, 800) 
 for massID in range(len(mass_list)):
-    h_phi_mu2mu3=merged_file.Get("HN_mass_"+mass_list[massID]+"/h_deltaphi_mu2mu3")
-    h_phi_mu2mu3.SetLineColor(1+massID)
-    h_phi_mu2mu3.SetLineWidth(3)
-    h_phi_mu2mu3.Draw("hesame")
+    h_phi_mu2tau=merged_file.Get("HN_mass_"+mass_list[massID]+"/h_deltaphi_mu2tau")
+    h_phi_mu2tau.SetLineColor(1+massID)
+    h_phi_mu2tau.SetLineWidth(3)
+    h_phi_mu2tau.Draw("hesame")
 legend.Draw()
-c_deltaphi_mu2mu3.SaveAs("plots/deltaphi_mu2mu3.png")
+c_deltaphi_mu2tau.SaveAs("plots/deltaphi_mu2tau.png")
 
-c_deltaR_mu2mu3 = TCanvas("c_deltaR_mu2mu3", "canvas title", 800, 800)
+c_deltaR_mu2tau = TCanvas("c_deltaR_mu2tau", "canvas title", 800, 800)
 for massID in range(len(mass_list)):
-    h_R_mu2mu3=merged_file.Get("HN_mass_"+mass_list[massID]+"/h_deltaR_mu2mu3")
-    h_R_mu2mu3.SetLineColor(1+massID)
-    h_R_mu2mu3.SetLineWidth(3)
-    h_R_mu2mu3.Draw("hesame")
+    h_R_mu2tau=merged_file.Get("HN_mass_"+mass_list[massID]+"/h_deltaR_mu2tau")
+    h_R_mu2tau.SetLineColor(1+massID)
+    h_R_mu2tau.SetLineWidth(3)
+    h_R_mu2tau.Draw("hesame")
 legend.Draw()
-c_deltaR_mu2mu3.SaveAs("plots/deltaR_mu2mu3.png")
+c_deltaR_mu2tau.SaveAs("plots/deltaR_mu2tau.png")
 
 
 c_m_HN = TCanvas("c_m_HN", "canvastitle", 800, 800)
