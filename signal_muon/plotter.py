@@ -5,6 +5,8 @@ import sys
 ROOT.gROOT.SetBatch(True)
 ROOT.gStyle.SetOptStat(0)
 ROOT.gStyle.SetPalette(1,0,1)
+ROOT.gStyle.SetPadTickX(1)
+ROOT.gStyle.SetPadTickY(1)
 
 
 mass_list=sys.argv[1:]
@@ -13,7 +15,7 @@ mass_list=sys.argv[1:]
 merged_file = TFile("histograms.root","READ")
 
 
-legend = TLegend(0.7, 0.75, 0.88, 0.88) # x0, y0, x1, y1
+legend = TLegend(0.6, 0.72, 0.78, 0.85) # x0, y0, x1, y1
 legend.SetFillStyle(0)
 legend.SetFillColor(0)
 legend.SetLineColor(0)
@@ -27,7 +29,7 @@ for massID in range(len(mass_list)):
     h_cutflow=merged_file.Get("HN_mass_"+mass_list[massID]+"/h_cutflow")
     h_cutflow.SetLineColor(1+massID)
     h_cutflow.SetLineWidth(3)
-    legend.AddEntry(h_cutflow," "+mass_list[massID]+" GeV","l")
+    legend.AddEntry(h_cutflow,"HN "+mass_list[massID]+" GeV","l")
     h_cutflow.Draw("hesame")
 legend.Draw()
 c_cutflow.SaveAs("plots/cutflow.png")
@@ -41,6 +43,7 @@ for massID in range(len(mass_list)):
     h_FD_HN.Draw("hesame")
 legend.Draw()
 c_FD_HN.SaveAs("plots/FD_HN.png")
+c_FD_HN.SaveAs("plots/FD_HN.pdf")
 
 
 
@@ -54,6 +57,7 @@ for massID in range(len(mass_list)):
     h_FDx_HN.Draw("hesame")
 legend.Draw()
 c_FDx_HN.SaveAs("plots/FDx_HN.png")
+c_FDx_HN.SaveAs("plots/FDx_HN.pdf")
 
 c_FDy_HN = TCanvas("c_FDy_HN","canvas title", 800, 800) 
 #c_FDy_HN.SetLogy(1)
@@ -64,6 +68,7 @@ for massID in range(len(mass_list)):
     h_FDy_HN.Draw("hesame")
 legend.Draw()
 c_FDy_HN.SaveAs("plots/FDy_HN.png")
+c_FDy_HN.SaveAs("plots/FDy_HN.pdf")
 
 c_FDt_HN = TCanvas("c_FDt_HN","canvas title", 800, 800) 
 c_FDt_HN.SetLogy(1)
@@ -74,6 +79,7 @@ for massID in range(len(mass_list)):
     h_FDt_HN.Draw("hesame")
 legend.Draw()
 c_FDt_HN.SaveAs("plots/FDt_HN.png")
+c_FDt_HN.SaveAs("plots/FDt_HN.pdf")
 
 c_FDz_HN = TCanvas("c_FDz_HN","canvas title", 800, 800) 
 c_FDz_HN.SetLogy(1)
@@ -84,6 +90,7 @@ for massID in range(len(mass_list)):
     h_FDz_HN.Draw("hesame")
 legend.Draw()
 c_FDz_HN.SaveAs("plots/FDz_HN.png")
+c_FDz_HN.SaveAs("plots/FDz_HN.pdf")
 
 c_FD_HN_norm = TCanvas("c_FD_HN_norm","canvas title", 800, 800) 
 c_FD_HN_norm.SetLogy(1)
@@ -108,6 +115,7 @@ for massID in range(len(mass_list)):
     h_FD_HN_norm.Draw("hesame")
 legend.Draw()
 c_FD_HN_norm.SaveAs("plots/FD_HN_norm.png")
+c_FD_HN_norm.SaveAs("plots/FD_HN_norm.pdf")
 
 #energy canvas
 c_energy_B = TCanvas("c_energy_B","canvas title", 800, 800) 
@@ -153,6 +161,28 @@ for massID in range(len(mass_list)):
     h_energy_tau.Draw("hesame")
 legend.Draw()
 c_energy_tau.SaveAs("plots/energy_tau.png")
+
+
+c_energy_tau_HNRF = TCanvas("c_energy_tau_HNRF","canvas title", 800, 800) 
+minY=-1
+maxY=-1
+
+for massID in range(len(mass_list)):
+    h_energy_tau_HNRF=merged_file.Get("HN_mass_"+mass_list[massID]+"/h_energy_tau_HNRF")
+    if(h_energy_tau_HNRF.GetMaximum()>maxY or maxY==-1):
+      maxY = h_energy_tau_HNRF.GetMaximum()
+    if(h_energy_tau_HNRF.GetMinimum()<minY or minY==-1):
+      minY = h_energy_tau_HNRF.GetMinimum()
+
+for massID in range(len(mass_list)):
+    h_energy_tau_HNRF=merged_file.Get("HN_mass_"+mass_list[massID]+"/h_energy_tau_HNRF")
+    h_energy_tau_HNRF.SetLineColor(1+massID)
+    h_energy_tau_HNRF.SetLineWidth(3)
+    if (massID == 0):
+      h_energy_tau_HNRF.GetYaxis().SetRangeUser(minY,1.2*maxY)
+    h_energy_tau_HNRF.Draw("hesame")
+legend.Draw()
+c_energy_tau_HNRF.SaveAs("plots/energy_tau_HNRF.png")
 
 c_energy_mu1 = TCanvas("c_energy_mu1","canvas title", 800, 800) 
 c_energy_mu1.SetLogy(1)
@@ -338,6 +368,30 @@ for massID in range(len(mass_list)):
 legend.Draw()
 c_phi_neutrino.SaveAs("plots/phi_neutrino.png")
 
+
+c_true_theta_HN = TCanvas("c_true_theta_HN","canvas title", 800, 800) 
+minY=-1
+maxY=-1
+
+for massID in range(len(mass_list)):
+    h_true_theta_HN=merged_file.Get("HN_mass_"+mass_list[massID]+"/h_true_theta_HN")
+    if(h_true_theta_HN.GetMaximum()>maxY or maxY==-1):
+      maxY = h_true_theta_HN.GetMaximum()
+    if(h_true_theta_HN.GetMinimum()<minY or minY==-1):
+      minY = h_true_theta_HN.GetMinimum()
+
+for massID in range(len(mass_list)):
+    h_true_theta_HN=merged_file.Get("HN_mass_"+mass_list[massID]+"/h_true_theta_HN")
+    h_true_theta_HN.SetLineColor(1+massID)
+    h_true_theta_HN.SetLineWidth(3)
+    if (massID == 0):
+      h_true_theta_HN.GetYaxis().SetRangeUser(minY,1.2*maxY)
+    h_true_theta_HN.Draw("hesame")
+legend.Draw()
+c_true_theta_HN.SaveAs("plots/true_theta_HN.png")
+
+
+
 c_deltaphi_mu1mu2 = TCanvas("c_deltaphi_mu1mu2","canvas title", 800, 800) 
 for massID in range(len(mass_list)):
     h_phi_mu1mu2=merged_file.Get("HN_mass_"+mass_list[massID]+"/h_deltaphi_mu1mu2")
@@ -394,7 +448,7 @@ c_deltaR_mu2tau.SaveAs("plots/deltaR_mu2tau.png")
 
 
 c_m_HN = TCanvas("c_m_HN", "canvastitle", 800, 800)
-c_m_HN.SetLogy(1)
+#c_m_HN.SetLogy(1)
 for massID in range(len(mass_list)):
     h_m_HN=merged_file.Get("HN_mass_"+mass_list[massID]+"/h_m_HN")
     h_m_HN.SetLineColor(1+massID)
@@ -404,7 +458,7 @@ legend.Draw()
 c_m_HN.SaveAs("plots/m_HN.png")
 
 c_m_HNprime = TCanvas("c_m_HNprime", "canvastitle", 800, 800)
-c_m_HNprime.SetLogy(1)
+#c_m_HNprime.SetLogy(1)
 for massID in range(len(mass_list)):
     h_m_HNprime=merged_file.Get("HN_mass_"+mass_list[massID]+"/h_m_HNprime")
     h_m_HNprime.SetLineColor(1+massID)
@@ -412,3 +466,4 @@ for massID in range(len(mass_list)):
     h_m_HNprime.Draw("hesame")
 legend.Draw()
 c_m_HNprime.SaveAs("plots/m_HNprime.png")
+c_m_HNprime.SaveAs("plots/m_HNprime.pdf")

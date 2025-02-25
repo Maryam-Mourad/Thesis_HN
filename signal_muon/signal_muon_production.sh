@@ -1,6 +1,8 @@
-IDs=(41 42 43 44)
-masses=(2.2 3.0 4.0 5.0)
-ctaus=(3.041 0.645 0.153 0.050)
+IDs=(41 42 43 44 434)
+masses=(2.2 3.0 4.0 5.0 4.5)
+#ctaus=(3.041 0.645 0.153 0.050)
+#ctaus=(4628.421 879.474 161.646 41.739) 
+ctaus=(1131 219 46.4 14.18 24.8) #coupling square times ctau times 10E5 [mm] #baseline_ctau
 
 nEvents=1000000
 generation=0
@@ -51,7 +53,7 @@ do
     echo
     echo ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
     echo running the mastercode for this mass point ...
-    python3 mastercode_signal_muon.py ${masses[$massPoint]} $massPoint $nEvents
+    #python3 mastercode_signal_muon.py ${masses[$massPoint]} $massPoint $nEvents ${ctaus[$massPoint]}
     echo finished mass value ${masses[$massPoint]}
     echo ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
     echo 
@@ -60,11 +62,28 @@ do
 done
 
 hadd -f histograms.root HN*/histograms_mass_*.root
+
+if [ -r plots ]; then
+    echo
+else
+    mkdir plots
+    echo plots directory created.
+fi
+
 python3 plotter.py ${masses[@]}
 
 
-hadd -f histograms_muon.root histograms.root ../gamma2/histograms.root
+hadd -f histograms_muon.root histograms.root ../gamma2/histograms.root ../gamma42/histograms.root ../gamma9/histograms.root
 cd ..
+
+if [ -r plots_muon ]; then
+    echo
+else
+    mkdir plots_muon
+    echo plots directory created.
+fi
+
+
 python3 plotter_muon.py ${masses[@]}
 
 

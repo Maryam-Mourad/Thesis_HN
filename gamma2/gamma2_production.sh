@@ -16,5 +16,13 @@ if [ $generation = generate ]; then
 else
     echo Skipping MC generation and moving to plotting ...
 fi
+
+if [ -r plots ]; then
+    echo
+else
+    mkdir plots
+    echo plots directory created.
+fi
+
 python3 mastercode_gamma2.py $nEvents
 
